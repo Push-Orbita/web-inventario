@@ -1,6 +1,8 @@
 import React from "react"
 
-import { useMenuToggle } from "../hooks/useMenuToggle"
+import { useMenuToggle } from "@hooks/useMenuToggle"
+import { AppTopbar } from "./AppTopbar";
+import AppSidebar from "./AppSidebar";
 
 interface IProps {
     children: React.ReactNode // ReactNode es cualquier cosa que React puede renderizar (component, string, number, undefined, etc)
@@ -13,11 +15,11 @@ export const DashboardLayout = ({ children }: IProps) => {
 
     return (
         <div className={`layout-wrapper layout-static p-ripple-disabled ${isOpenMenu ? 'layout-menu-open layout-mobile-active' : 'layout-static-inactive'}`}>
-            {/* <AppTopbar /> */}
+            <AppTopbar />
             {isOpenMenu && (
                 <>
                     <div className="layout-sidebar">
-                        {/* <AppSidebar /> */}
+                        <AppSidebar />
                     </div>
                     <div className="layout-mask" onClick={handleToggleMenu}></div>
                 </>

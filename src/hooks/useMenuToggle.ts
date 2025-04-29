@@ -1,16 +1,14 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-
-// import { RootState } from "../redux/store/store";
-import { toggleMenu, closeMenu } from "../redux/slices/uiSlices/uiSlice";
+import { toggleMenu, closeMenu } from "@redux/slices/uiSlices/uiSlice";
+import { useAppDispatch, useAppSelector } from "./reduxHook";
 
 
 // controlamos si el menu lateral (sidebar) del dashboard está abierto o cerrado,
 // y cerrarlo automáticamente cuando el ancho de la pantalla sea menor a 830px
 export const useMenuToggle = () => {
 
-    const dispatch = useDispatch();
-    const isOpenMenu = useSelector((state: RootState) => state.ui.isOpenMenu); // valor actual del menú (true o false)
+    const dispatch = useAppDispatch();
+    const isOpenMenu = useAppSelector(state => state.ui.isOpenMenu); // valor actual del menú (true o false)
 
     // disparamos la accion toggleMenu
     const handleToggleMenu = () => {

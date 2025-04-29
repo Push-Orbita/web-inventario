@@ -1,8 +1,8 @@
-// import { DashboardLayout } from "../../layout/DashboardLayout";
+import { DashboardLayout } from "@layout/DashboardLayout";
 
 const Home = () => {
     return (
-        // <DashboardLayout>
+        <DashboardLayout>
             <div className="grid">
                 <div className="col-12">
                     <div className="card">
@@ -10,7 +10,7 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-        // </DashboardLayout>
+        </DashboardLayout>
     )
 };
 

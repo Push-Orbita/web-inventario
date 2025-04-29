@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { PublicRoutes } from "./PublicRoutes";
 import { PrivateRoutes } from "./PrivateRoutes";
 import { RouterJs } from "./RouterJs";
-import AuthLogin from "../pages/auth/AuthLogin";
+import AuthLogin from "@pages/auth/AuthLogin";
 
 export const AppRouter = () => {
   return (
