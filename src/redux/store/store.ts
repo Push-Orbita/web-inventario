@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore, persistReducer } from "redux-persist";
-// import { thunk } from "redux-thunk";
+import { thunk } from "redux-thunk";
 import storage from "redux-persist/lib/storage"; // almacenamiento por defecto (localStorage)
 
 import uiSlice from "../slices/uiSlices/uiSlice";
+import authSlice from "../slices/auth/authSlice/authSlice";
 
 
 const persistUiConfig = {
@@ -11,23 +12,18 @@ const persistUiConfig = {
     storage // donde se guarda
 }
 
-// comentamos esto hasta que implementemos auth
-// const persistAuthConfig = {
-//     key: "auth",
-//     storage,
-// };
+const persistAuthConfig = {
+    key: "auth",
+    storage,
+};
 
 export const store = configureStore({ // creamos el store
     reducer: {
         ui: persistReducer<ReturnType<typeof uiSlice>>(persistUiConfig, uiSlice),
-        // auth: persistReducer<ReturnType<typeof authSlice>>(
-        //     persistAuthConfig,
-        //     authSlice
-        // ),
-    }, middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: false // desactivamos el chequeo de serializabilidad
-        })
+        auth: persistReducer<ReturnType<typeof authSlice>>(persistAuthConfig, authSlice),
+    }, middleware: (getDefaultMiddleware) => { // agregamos redux-thunk para hacer peticiones asincronas
+        return getDefaultMiddleware().concat(thunk);
+    },
 });
 
 // inicializamos redux-persist para que comience a guardar/cargar el estado del store

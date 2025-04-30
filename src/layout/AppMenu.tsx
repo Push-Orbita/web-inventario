@@ -1,9 +1,13 @@
-
-
+import { MenuProvider } from "@context/menuContext"
 
 
 export const AppMenu = () => {
+
   return (
-    <div>AppMenu</div>
+    <MenuProvider>
+      <ul className="layout-menu">
+
+      </ul>
+    </MenuProvider>
   )
 }
