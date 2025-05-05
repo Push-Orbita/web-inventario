@@ -1,8 +1,9 @@
+import { AuthLayout } from "@layout/AuthLayout";
 
 
 const AuthLogin = () => {
     return (
-        <h1>LOGIN</h1>
+        <AuthLayout Form={<>Login</>} />
     )
 }
 

@@ -3,15 +3,19 @@ import { PublicRoutes } from "./PublicRoutes";
 import { PrivateRoutes } from "./PrivateRoutes";
 import { RouterJs } from "./RouterJs";
 import AuthLogin from "@pages/auth/AuthLogin";
+import { useAppSelector } from "@hooks/reduxHook";
 
 export const AppRouter = () => {
+
+  const { isLogged } = useAppSelector((state) => state.auth);
+
   return (
     <>
       <Routes>
         <Route
           path="/login"
           element={
-            <PublicRoutes isAuthenticated={true}>
+            <PublicRoutes isAuthenticated={isLogged}>
               <AuthLogin />
             </PublicRoutes>
           }
@@ -19,7 +23,7 @@ export const AppRouter = () => {
         <Route
           path="/*"
           element={
-            <PrivateRoutes isAuthenticated={true}>
+            <PrivateRoutes isAuthenticated={isLogged}>
               <RouterJs />
             </PrivateRoutes>
           }

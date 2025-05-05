@@ -3,13 +3,17 @@ import { Suspense, ComponentType, lazy, LazyExoticComponent, } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 // cargamos el componente solamente cuando sea necesario (cuando el usuario accede a /home).
+const AuthLogin = lazy(() => import('../pages/auth/AuthLogin'));
 const HomeAdmin = lazy(() => import('../pages/home/Home'));
+// const ConfiguracionUsuario = lazy(() => import('../pages/usuario/ConfiguracionUsuario'));
 
 
 type ComponentsMap = Record<string, LazyExoticComponent<ComponentType<any>>>;
 
 const componentsMap: ComponentsMap = {
+    'AuthLogin': AuthLogin,
     'HomeAdmin': HomeAdmin,
+    // 'ConfiguracionUsuario': ConfiguracionUsuario
 };
 
 export const RouterJs = () => {
