@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom"
 import { PrimeReactProvider } from 'primereact/api';
 import { Toaster } from 'react-hot-toast';
@@ -16,18 +18,56 @@ import './components/common/style/layout/layout.scss'
 
 function App() {
 
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false, // refecht cuando se cambia de pantalla
+        staleTime: Infinity,
+        cacheTime: 1000 * 60 * 60 * 0, // 24 hours
+        retry: 2, // reintentar fetches fallidos hasta 2 veces automáticamente
+        refetchOnMount: false,
+        refetchOnReconnect: true, // se vuelve a intentar si se pierde y recupera la conexión.
+      },
+    },
+  })
+
+  // obtenemos del redux si el tema es claro o oscuro
   const isDarkTheme = useAppSelector(state => state.ui.theme);
+
+  // cambia dinámicamente el archivo de CSS del tema según si el usuario está en modo oscuro o claro
+  useEffect(() => {
+    const linkId = 'theme-link';
+    let themeLink = document.getElementById(linkId) as HTMLLinkElement;
+
+    // usa un <link> que se inserta en el <head> del HTML y cambia su href dependiendo del tema.
+    if (!themeLink) {
+      themeLink = document.createElement('link');
+      themeLink.id = linkId;
+      themeLink.rel = 'stylesheet';
+      document.head.appendChild(themeLink);
+    }
+
+    // cambia la ruta del tema basado en isDarkTheme
+    themeLink.href = isDarkTheme
+      ? '/node_modules/primereact/resources/themes/soho-dark/theme.css'
+      : '/node_modules/primereact/resources/themes/lara-light-blue/theme.css';
+
+  }, [isDarkTheme]);
 
   return (
     <>
       <BrowserRouter>
-        <PersistGate persistor={persistor}> {/* Componente para gestionar el estado persistente */}
-          <PrimeReactProvider> {/* Componente de PrimeReact para envolver la aplicación */}
-            <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />  {/* Componente de Toaster para mostrar notificaciones */}
-            <ConfirmDialog />  {/* Componente para mostrar diálogos de confirmación */}
-            <AppRouter />
-          </PrimeReactProvider>
-        </PersistGate>
+        <QueryClientProvider client={queryClient}>
+          <PersistGate persistor={persistor}> {/* Componente para gestionar el estado persistente */}
+            <PrimeReactProvider> {/* Componente de PrimeReact para envolver la aplicación */}
+              <div className={isDarkTheme ? 'dark-theme' : 'light-theme'}>
+                <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />  {/* Componente de Toaster para mostrar notificaciones */}
+                <ConfirmDialog />  {/* Componente para mostrar diálogos de confirmación */}
+                <AppRouter />
+              </div>
+            </PrimeReactProvider>
+          </PersistGate>
+        </QueryClientProvider>
       </BrowserRouter>
     </>
   )
