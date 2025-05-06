@@ -7,9 +7,12 @@ import { PersistGate } from "redux-persist/lib/integration/react";
 
 import { ConfirmDialog } from "primereact/confirmdialog";
 
+import { MenuProvider } from "@context/menuContext";
 import { AppRouter } from "@router/AppRouter";
 import { persistor } from "@redux/store/store";
 import { useAppSelector } from "@hooks/reduxHook";
+import { PermisosProvider } from "@hooks/usePermisos";
+import { ModuleProvider } from "@hooks/useModules";
 
 import 'primereact/resources/primereact.min.css';
 import 'primeflex/primeflex.css';
@@ -63,9 +66,15 @@ function App() {
           <PersistGate persistor={persistor}> {/* Componente para gestionar el estado persistente */}
             <PrimeReactProvider> {/* Componente de PrimeReact para envolver la aplicación */}
               <div className={isDarkTheme ? 'dark-theme' : 'light-theme'}>
-                <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />  {/* Componente de Toaster para mostrar notificaciones */}
-                <ConfirmDialog />  {/* Componente para mostrar diálogos de confirmación */}
-                <AppRouter />
+                <PermisosProvider>
+                  <ModuleProvider>
+                    <MenuProvider>
+                      <Toaster position="bottom-right" toastOptions={{ duration: 5000 }} />  {/* Componente de Toaster para mostrar notificaciones */}
+                      <ConfirmDialog />  {/* Componente para mostrar diálogos de confirmación */}
+                      <AppRouter />
+                    </MenuProvider>
+                  </ModuleProvider>
+                </PermisosProvider>
               </div>
             </PrimeReactProvider>
           </PersistGate>
