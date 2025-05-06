@@ -4,7 +4,9 @@ import { AuthForm } from '@features/auth/components/AuthForm';
 
 const AuthLogin = () => {
     return (
-        <AuthLayout Form={<AuthForm />} />
+        <AuthLayout 
+            Form={<AuthForm />} 
+        />
     )
 }
 

@@ -85,4 +85,3 @@ export interface SistemaClass {
     id: number;
     nombre: string;
 }
-

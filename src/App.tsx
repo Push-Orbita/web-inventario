@@ -15,6 +15,8 @@ import 'primereact/resources/primereact.min.css';
 import 'primeflex/primeflex.css';
 import './components/common/style/layout/layout.scss'
 
+import './i18n';
+
 
 function App() {
 
@@ -23,7 +25,7 @@ function App() {
       queries: {
         refetchOnWindowFocus: false, // refecht cuando se cambia de pantalla
         staleTime: Infinity,
-        cacheTime: 1000 * 60 * 60 * 0, // 24 hours
+        // cacheTime: 1000 * 60 * 60 * 0,
         retry: 2, // reintentar fetches fallidos hasta 2 veces automáticamente
         refetchOnMount: false,
         refetchOnReconnect: true, // se vuelve a intentar si se pierde y recupera la conexión.
