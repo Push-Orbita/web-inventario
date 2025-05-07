@@ -8,13 +8,16 @@ export const Axios = axios.create({
 export const AuthAxios = axios.create({
     baseURL: `${import.meta.env.VITE_APP_API_URL_AUTH}`,
 })
+
 export const cancelTokenSource = axios.CancelToken.source()
+
 export const authorize = async (access_token: string) => {
     Axios.defaults.headers.common["Authorization"] = "Bearer " + access_token
     AuthAxios.defaults.headers.common["Authorization"] =
         "Bearer " + access_token
     return { Axios, AuthAxios }
 }
+
 const errorInterceptor = (error: any) => {
     if (error.response) {
         const { status, data } = error.response
@@ -42,5 +45,7 @@ const errorInterceptor = (error: any) => {
 
     return Promise.reject(error)
 }
+
 Axios.interceptors.response.use(response => response, errorInterceptor)
+
 AuthAxios.interceptors.response.use(response => response, errorInterceptor)
