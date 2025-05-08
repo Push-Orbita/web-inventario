@@ -1,0 +1,72 @@
+.preloader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+}
+
+#preloader5 {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background: #3498db;
+    border-radius: 50px;
+    animation: preloader_5 1.5s infinite linear;
+}
+
+#preloader5:after {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-top: 10px solid #9b59b6;
+    border-bottom: 10px solid #9b59b6;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-radius: 50px;
+    content: '';
+    top: -20px;
+    left: -20px;
+    animation: preloader_5_after 1.5s infinite linear;
+}
+
+@keyframes preloader_5 {
+    0% {transform: rotate(0deg);}
+    50% {transform: rotate(180deg); background: #2ecc71;}
+    100% {transform: rotate(360deg);}
+}
+
+@keyframes preloader_5_after {
+    0% {border-top: 10px solid #9b59b6; border-bottom: 10px solid #9b59b6;}
+    50% {border-top: 10px solid #3498db; border-bottom: 10px solid #3498db;}
+    100% {border-top: 10px solid #9b59b6; border-bottom: 10px solid #9b59b6;}
+}
+
+.custom-fieldset .p-fieldset-legend {
+    color: var(--primary-color);
+}
+
+/* Oculta todos los estilos de tema por defecto */
+:root .p-component,
+:root .p-component * {
+  --theme-background: none;
+  --theme-color: none;
+  /* ... otras variables de tema ... */
+}
+
+/* Aplica los estilos del tema oscuro */
+.dark-theme :root .p-component,
+.dark-theme :root .p-component * {
+  --theme-background: var(--dark-theme-background);
+  --theme-color: var(--dark-theme-color);
+  /* ... otras variables del tema oscuro ... */
+}
+
+/* Aplica los estilos del tema claro */
+.light-theme :root .p-component,
+.light-theme :root .p-component * {
+  --theme-background: var(--light-theme-background);
+  --theme-color: var(--light-theme-color);
+  /* ... otras variables del tema claro ... */
+}

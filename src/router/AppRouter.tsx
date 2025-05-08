@@ -22,8 +22,8 @@ export const AppRouter = () => {
   // función para obtener el token de autenticación
   const getAuthToken = async () => {
     const response = await AuthApi.postAuthSistem({
-      clientId: import.meta.env.VITE_CLIENT_ID,
-      clientSecret: import.meta.env.VITE_CLIENT_SECRET,
+      clientId: import.meta.env.VITE_APP_CLIENT_ID,
+      clientSecret: import.meta.env.VITE_APP_CLIENT_SECRET,
     });
 
     return response.data;

@@ -18,7 +18,6 @@ export const AppTopbar = () => {
         <div className="layout-topbar">
             <Button type="button" rounded text onClick={handleToggleMenu}>
                 <i className="pi pi-bars" />
-                -
             </Button>
 
             <div className='flex justify-content-end w-full'>
