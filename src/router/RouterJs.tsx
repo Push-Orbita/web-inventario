@@ -5,7 +5,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 // cargamos el componente solamente cuando sea necesario (cuando el usuario accede a /home).
 const AuthLogin = lazy(() => import('../pages/auth/AuthLogin'));
 const HomeAdmin = lazy(() => import('../pages/home/Home'));
-// const ConfiguracionUsuario = lazy(() => import('../pages/usuario/ConfiguracionUsuario'));
+const ConfiguracionUsuario = lazy(() => import('../pages/usuario/ConfiguracionUsuario'));
 
 
 type ComponentsMap = Record<string, LazyExoticComponent<ComponentType<any>>>;
@@ -13,7 +13,7 @@ type ComponentsMap = Record<string, LazyExoticComponent<ComponentType<any>>>;
 const componentsMap: ComponentsMap = {
     'AuthLogin': AuthLogin,
     'HomeAdmin': HomeAdmin,
-    // 'ConfiguracionUsuario': ConfiguracionUsuario
+    'ConfiguracionUsuario': ConfiguracionUsuario
 };
 
 export const RouterJs = () => {
@@ -72,7 +72,7 @@ export const RouterJs = () => {
                         <HomeAdmin />
                     </Suspense>
                 } />
-                {/* <Route path="/configuracion-usuario" element={
+                <Route path="/configuracion-usuario" element={
                     <Suspense fallback={
                         <div className="preloader-container">
                             <div id="preloader5"></div>
@@ -80,7 +80,7 @@ export const RouterJs = () => {
                     }>
                         <ConfiguracionUsuario />
                     </Suspense>
-                } /> */}
+                } />
             </Routes>
         </div>
     )
