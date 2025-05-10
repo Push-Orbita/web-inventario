@@ -6,6 +6,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 const AuthLogin = lazy(() => import('../pages/auth/AuthLogin'));
 const HomeAdmin = lazy(() => import('../pages/home/Home'));
 const ConfiguracionUsuario = lazy(() => import('../pages/usuario/ConfiguracionUsuario'));
+const Modelo = lazy(() => import('../pages/gestion-productos/Modelo'));
 
 
 type ComponentsMap = Record<string, LazyExoticComponent<ComponentType<any>>>;
@@ -13,13 +14,13 @@ type ComponentsMap = Record<string, LazyExoticComponent<ComponentType<any>>>;
 const componentsMap: ComponentsMap = {
     'AuthLogin': AuthLogin,
     'HomeAdmin': HomeAdmin,
-    'ConfiguracionUsuario': ConfiguracionUsuario
+    'ConfiguracionUsuario': ConfiguracionUsuario,
+    'Modelo': Modelo,
 };
 
 export const RouterJs = () => {
 
     const { userModulos } = useAppSelector(state => state.auth);
-    console.log("userModulos", userModulos);
     
 
     // función para generar las rutas dinámicas
