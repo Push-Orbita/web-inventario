@@ -38,6 +38,8 @@ export const AuthForm = () => {
             });
 
             const transformedData = transformResponse(response.data);  // Transforma la respuesta del backend al formato que necesita tu frontend
+            console.log('data transformada:',transformedData);
+            
 
             if (transformedData) {
                 dispatch(setUserToken(transformedData as unknown as UserEntity));

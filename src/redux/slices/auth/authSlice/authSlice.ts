@@ -4,6 +4,7 @@ import { UserEntity } from '../interface/user.entity';
 
 const initialStateAuth: UserEntity = {
   userNombre: '',
+  userEmail: '',
   organizacion: '',
   plan: '',
   sistema: '',
@@ -27,6 +28,7 @@ export const authSlice = createSlice({
       return {
         ...state,
         userNombre: action.payload.userNombre,
+        userEmail: action.payload.userEmail,
         organizacion: action.payload.organizacion,
         tokenUser: action.payload.tokenUser,
         tokenSistem: action.payload.tokenSistem,

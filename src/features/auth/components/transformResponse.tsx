@@ -1,5 +1,6 @@
 interface BackendResponse {
   nombre: string;
+  email: string;
   persona: {
     nombre: string;
     apellido: string;
@@ -29,6 +30,7 @@ interface ModuloBackend {
 
 interface FrontendData {
   userNombre: string;
+  userEmail: string;
   tokenUser: string;
   organizacion: string;
   sistema: string;
@@ -55,15 +57,17 @@ export const transformResponse = (backendData: BackendResponse): FrontendData | 
     return null; // o un objeto vacío, dependiendo de lo que necesites
   }
 
-  const { persona, permiso, userModulos, tokens } = backendData;
+  const { persona, permiso, userModulos, tokens, email } = backendData;
 
   // 1. Construir el nombre completo del usuario
   const userNombre = `${persona.apellido} ${persona.nombre}`;
+  // 2. Extraer el email del usuario
+  const userEmail = email || '';
 
-  // 2. Extraer la organización
+  // 3. Extraer la organización
   const organizacion = permiso[0]?.organizacion?.nombre || '';
 
-  // 3. Construir los módulos para el frontend de manera recursiva
+  // 4. Construir los módulos para el frontend de manera recursiva
   const transformModulos = (modulos: ModuloBackend[]): FrontendModuleItem[] => {
     return modulos?.map(modulo => ({
       label: modulo.label,
@@ -83,9 +87,10 @@ export const transformResponse = (backendData: BackendResponse): FrontendData | 
     }
   ];
 
-  // 4. Construir el objeto final
+  // 5. Construir el objeto final
   const transformedData: FrontendData = {
     userNombre,
+    userEmail,
     tokenUser: tokens.access_token,
     organizacion,
     sistema: userModulos?.modulos?.[0]?.nombre || 'Sistema desconocido',

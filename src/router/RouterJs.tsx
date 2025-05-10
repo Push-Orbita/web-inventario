@@ -19,6 +19,8 @@ const componentsMap: ComponentsMap = {
 export const RouterJs = () => {
 
     const { userModulos } = useAppSelector(state => state.auth);
+    console.log("userModulos", userModulos);
+    
 
     // función para generar las rutas dinámicas
     const renderRoutes = (modulos: any) => {

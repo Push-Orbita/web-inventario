@@ -2,7 +2,7 @@ import { Divider } from 'primereact/divider';
 import { useAppSelector } from '@hooks/reduxHook';
 
 const PersonalInfo = () => {
-    const { userNombre } = useAppSelector((state) => state.auth);
+    const { userNombre, userEmail } = useAppSelector((state) => state.auth);
     console.log(userNombre)
     return (
         <>
@@ -25,7 +25,7 @@ const PersonalInfo = () => {
                         Email:
                     </p>
                     <p>
-                        <strong>nahuel14321@gmail.com</strong>
+                        <strong>{userEmail}</strong>
                     </p>
                 </div>
                 <Divider />
